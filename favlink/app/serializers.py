@@ -119,5 +119,6 @@ class FavoriteWithTagNameSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         tag_names = [tag.name for tag in instance.tags.all()]
         data['tags'] = tag_names
-        data['category'] = instance.category.name
+        if instance.category is not None:
+            data['category'] = instance.category.name
         return data
